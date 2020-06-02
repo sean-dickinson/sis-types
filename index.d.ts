@@ -589,3 +589,26 @@ export interface MailgunOptions {
   text: string,
   html?: string,
 }
+  
+export interface BankTransaction {
+  ID: string;
+  accountBalance: number;
+  accountName: string;
+  amount: number;
+  bankBalance: number;
+  timestamp: string;
+}
+
+export interface BankAccount {
+  ID: string;
+  archived: boolean;
+  balance: number;
+  created: string;
+  deposits: number;
+  email: string;
+  limit: number;
+  name: string;
+  type: "Student" | "Other";
+  authorizedUsers?: SimpleList;
+  withdrawls: number;
+}
