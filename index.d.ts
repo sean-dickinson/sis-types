@@ -1,4 +1,4 @@
-import { firestore } from 'firebase-admin';
+/// <reference types="firebase-admin"/>
 
 export type Role =
 | "any"
