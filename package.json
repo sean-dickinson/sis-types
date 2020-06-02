@@ -1,0 +1,6 @@
+{
+  "private": "true"
+  "dependencies": {
+    "firebase-admin": "^8.10.0"
+  }
+}
