@@ -614,3 +614,224 @@ export interface BankAccount {
   authorizedUsers?: SimpleList;
   withdrawls: number;
 }
+
+
+export interface Boarder {
+  ID: string;
+  name: string;
+  email: string;
+  cellPhone?: string;
+  boarder: string;
+  dorm: string;
+  room: string;
+  studyHall: StudyHallStatuses;
+  permissions: Permissions;
+  start?: string;
+  end?: string;
+  inspectionCount: number;
+}
+
+export interface StudyHallStatuses {
+  ASC?: boolean;
+  Turner?: boolean;
+  "Non-IS"?: boolean;
+}
+
+export interface Permissions {
+  home: PermissionsObj;
+  bike: PermissionsObj;
+  walk: PermissionsObj;
+  car: PermissionsObj;
+}
+
+export interface PermissionsObj {
+  type: string;
+  allowed: boolean;
+  restriction?: string;
+}
+
+export interface PlanTiming {
+  leaveDate: string;
+  returnDate: string;
+}
+
+export interface Transports {
+  leaving: string;
+  returning: string;
+}
+
+export interface Weekend {
+  id: string;
+  start: string;
+  end: string;
+  long: boolean;
+  eot: boolean;
+  trainLeave: string;
+  trainReturn: string;
+}
+
+export interface WeekendPlan {
+  uid: string;
+  name: string;
+  flags?: string[];
+  studentEmail: string;
+  timing?: PlanTiming;
+  transports?: Transports;
+  plan: string;
+  weekendID: string;
+  IDEmail: string;
+  approved: boolean;
+  denied?: boolean;
+  deniedReason?: string;
+}
+
+export interface InspectionRecord {
+  reasons: string;
+  dorm: string;
+  datestring: string;
+  ID: string;
+  name: string;
+  email: string;
+  uid: string;
+}
+
+export interface MaintenanceRequest {
+  subject: string;
+  requestor: string;
+  message: string;
+  building: string;
+  roomNumber?: string;
+  date: string;
+}
+export interface GroupedSignoutRecords {
+  date: string;
+  signouts: SignoutRecord[];
+}
+
+export interface SignoutRecord {
+  uid?: string;
+  timeOut: string;
+  timeIn?: string;
+  transport: string;
+  destination: string;
+  ID: string;
+  name: string;
+}
+
+export interface TempBoarder extends Boarder {
+  start: string;
+  end: string;
+}
+
+export interface CampusedRecord {
+  ID: string;
+  name: string;
+  until: string;
+}
+
+export interface TempPermissions {
+  ID: string;
+  name: string;
+  permissions: Permissions;
+}
+
+export interface CheckedInRecord {
+  ID: string;
+  name: string;
+  [checkIn: string]: string;
+}
+
+export type CheckIn = "dinner" | "brunch" | "studyHall" | "dorm";
+
+export interface CheckInMap {
+  dinner?: boolean;
+  brunch?: boolean;
+  studyHall?: boolean;
+  dorm?: boolean;
+}
+
+export interface DateCheckInMap {
+  [date: string]: CheckIn;
+}
+
+export interface CheckInReportRecord {
+  ID: string;
+  name: string;
+  date: string;
+  checkIns: CheckIn;
+}
+
+export interface CheckInDateRecord {
+  [date: string]: CheckedInRecord[];
+}
+
+export interface CheckInTiming {
+  name: string;
+  start: string;
+  end: string;
+  type: 'aod' | 'regular';
+}
+
+export interface CheckInTimingMap {
+  [name: string]: CheckInTiming;
+}
+
+export interface ReslifeSchedule {
+  date: string;
+  ID?: number;
+  checkIns: CheckInTimingMap;
+}
+
+export interface CheckInReportItem {
+  comment: string;
+  code: string;
+  iconName: string;
+  name: string;
+  sort: number;
+  color: string;
+}
+
+export interface DateInspectionMap {
+  [date: string]: string;
+}
+
+export interface GroupedCheckInRecord {
+  ID: string;
+  name: string;
+  records: DateCheckInMap;
+}
+
+export interface GroupedInspectionRecord {
+  ID: string;
+  name: string;
+  dorm: string;
+  fails: number;
+}
+
+export interface CheckInParams {
+  dorm?: string | null;
+  time: string;
+  name?: string;
+  location?: string;
+}
+
+export interface PlanAction {
+  action: string;
+  selected: Boarder[] | WeekendPlan[];
+}
+
+export interface ArrivalDepature {
+  name: string;
+  email: string;
+  isArrival: boolean;
+  isDeparture: boolean;
+  transport: string;
+  time: string;
+}
+
+export interface GroupedPlans {
+  day: string;
+  plans: ArrivalDepature[];
+  isEarly?: boolean;
+  isLate?: boolean;
+}
