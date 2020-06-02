@@ -1,5 +1,7 @@
 /// <reference types="firebase-admin"/>
 
+import {firestore} from 'firebase-admin';
+
 export type Role =
 | "any"
 // Admin Roles
