@@ -1,5 +1,37 @@
-import { Role } from './roles.models';
 import { firestore } from 'firebase-admin';
+
+export type Role =
+| "any"
+// Admin Roles
+  | "superAdmin"
+  | "registrarLabelAdmin"
+  | "staffManagementAdmin"
+  | "studentManagementAdmin"
+  | "scheduleAdmin"
+  | "sectionAdmin"
+  | "courseAdmin"
+  | "registrarReportingAdmin"
+  | "reportCardAdmin"
+  | "feedbackManagementAdmin"
+  // feedback specific roles
+  | "feedbackProcessor"
+  | "feedbackManagementAdmin"
+  | "feedbackViewer"
+  | "feedbackManagementAdmin"
+  | "feedbackReminder"
+  // report card specific roles
+  | "transcriptAdmin"
+  | "classroomTeacher"
+  | "coach"
+  // label specific roles
+  | "labelAdmin"
+  | "labelUser"
+  // student management roles
+  | "studentInfoEdit"
+  | "studentImport"
+  | "studentStatusEdit"
+  ;
+
 export type DepartureType =
   | "dismissed"
   | "graduated"
