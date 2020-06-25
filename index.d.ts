@@ -32,6 +32,8 @@ export type Role =
   | "studentInfoEdit"
   | "studentImport"
   | "studentStatusEdit"
+  // email roles
+  | "emailAdmin"
   ;
 
 export type DepartureType =
