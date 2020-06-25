@@ -840,4 +840,5 @@ export interface InAppEmailData {
   emailOptions: MailgunOptions;
   sender: string;
   test: boolean;
+  auth: string;
 }
