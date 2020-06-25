@@ -835,3 +835,9 @@ export interface GroupedPlans {
   isEarly?: boolean;
   isLate?: boolean;
 }
+
+export interface InAppEmailData {
+  emailOptions: MailgunOptions;
+  sender: string;
+  test: boolean;
+}
