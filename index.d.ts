@@ -74,6 +74,7 @@ export interface CalculatedExcusalPeriods {
 
 export type AttendanceCode = 'ABS-X' | 'ABS-U' | 'ABS-CUT' | 'LT-X' | 'LT-U' | 'Nurse' | 'Counselor' | 'ABS';
 
+export type BoardType = "5 Day" | "7 Day" | "Day";
 
 export interface AttendanceMark {
   code: AttendanceCode;
@@ -161,7 +162,7 @@ export interface PermissionsObj {
 export interface Student {
   address: Address;
   birthDate: string;
-  boarder: string;
+  boarder: BoardType;
   classOf: number;
   currentSchool: string;
   currentStudent: boolean;
@@ -623,7 +624,7 @@ export interface Boarder {
   name: string;
   email: string;
   cellPhone?: string;
-  boarder: string;
+  boarder: BoardType;
   dorm: string;
   room: string;
   studyHall: StudyHallStatuses;
@@ -843,4 +844,13 @@ export interface InAppEmailData {
   sender: string;
   test: boolean;
   auth: string;
+}
+
+export interface EmailListQuery {
+  grades: number[];
+  boarders: BoardType[];
+  includeParents: boolean;
+  includeInternationalParents: boolean;
+  includeStudents: boolean;
+  includeConsultants: boolean;
 }
