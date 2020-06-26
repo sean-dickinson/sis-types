@@ -1,6 +1,6 @@
 {
   "name": "sis-types",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": "true",
   "dependencies": {
     "firebase-admin": "^8.10.0"
