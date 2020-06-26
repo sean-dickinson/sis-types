@@ -357,6 +357,7 @@ export interface Relation {
   affiliation?: string;
   // TODO: need to add these properties in database etc
   isInternationalFamily: boolean;
+  isConsultant: boolean;
 }
 
 export interface Label {
@@ -420,10 +421,6 @@ export interface PeriodObj {
   period: string;
   start: string;
   end: string;
-  school: SchoolBoolean;
-  terms: TermList;
-  advisor: boolean;
-  academicYear: string;
 }
 
 export interface FeedbackForm {
@@ -481,6 +478,7 @@ export interface CoursePropChange {
 
 export interface SectionUpdate {
   section: Section;
+  isNew?: boolean;
   changes: SectionPropChange[] | SectionIndividualChange[];
 }
 
@@ -890,4 +888,9 @@ export interface EmailListQuery {
   includeInternationalParents: boolean;
   includeStudents: boolean;
   includeConsultants: boolean;
+}
+
+export interface QueryLists {	
+  students?: Student[];	
+  relations: Relation[];	
 }
