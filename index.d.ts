@@ -1,40 +1,9 @@
 /// <reference types="firebase-admin"/>
 
-import {firestore} from 'firebase-admin';
+import { firestore } from "firebase-admin";
+import { ROLES } from "./constants";
 
-export type Role =
-| "any"
-// Admin Roles
-  | "superAdmin"
-  | "registrarLabelAdmin"
-  | "staffManagementAdmin"
-  | "studentManagementAdmin"
-  | "scheduleAdmin"
-  | "sectionAdmin"
-  | "courseAdmin"
-  | "registrarReportingAdmin"
-  | "reportCardAdmin"
-  | "feedbackManagementAdmin"
-  // feedback specific roles
-  | "feedbackProcessor"
-  | "feedbackManagementAdmin"
-  | "feedbackViewer"
-  | "feedbackManagementAdmin"
-  | "feedbackReminder"
-  // report card specific roles
-  | "transcriptAdmin"
-  | "classroomTeacher"
-  | "coach"
-  // label specific roles
-  | "labelAdmin"
-  | "labelUser"
-  // student management roles
-  | "studentInfoEdit"
-  | "studentImport"
-  | "studentStatusEdit"
-  // email roles
-  | "emailAdmin"
-  ;
+export type Role = typeof ROLES;
 
 export type DepartureType =
   | "dismissed"
@@ -42,6 +11,7 @@ export type DepartureType =
   | "mid-year withdrawl"
   | "not returning"
   | "not invited back";
+
 export interface Course {
   ID: string;
   courseID: string;
@@ -55,6 +25,8 @@ export interface Course {
   active: boolean;
   school: School;
   prerequisites: Prerequisite[];
+  minClassSize: number;
+  targetClassSize: number;
 }
 
 export interface SectionCountType {
@@ -62,17 +34,24 @@ export interface SectionCountType {
   value: -1 | 1;
 }
 
-
 export interface MarkList {
   [period: string]: AttendanceMark | firestore.FieldValue;
 }
 
 export interface CalculatedExcusalPeriods {
-  periods: MarkList,
-  fields: firestore.FieldValue[]
+  periods: MarkList;
+  fields: firestore.FieldValue[];
 }
 
-export type AttendanceCode = 'ABS-X' | 'ABS-U' | 'ABS-CUT' | 'LT-X' | 'LT-U' | 'Nurse' | 'Counselor' | 'ABS';
+export type AttendanceCode =
+  | "ABS-X"
+  | "ABS-U"
+  | "ABS-CUT"
+  | "LT-X"
+  | "LT-U"
+  | "Nurse"
+  | "Counselor"
+  | "ABS";
 
 export type BoardType = "5 Day" | "7 Day" | "Day";
 
@@ -83,6 +62,10 @@ export interface AttendanceMark {
   section?: string;
 }
 
+export interface AdvisoryGroupedReport {
+  teacher: string;
+  reports: StudentReport[];
+}
 
 export interface AttendanceRecord {
   ID: string;
@@ -104,7 +87,6 @@ export interface CoverageRequest {
   dateString: string;
   emailSent: boolean;
 }
-
 
 export interface InspectionRecord {
   reasons: string;
@@ -178,7 +160,7 @@ export interface Student {
   enrollments: Enrollment[];
 }
 
-export interface Enrollment{
+export interface Enrollment {
   enrollmentDate: string;
   departure?: Departure;
 }
@@ -188,13 +170,12 @@ export interface Departure {
   departureReason: DepartureType;
 }
 
-
 export interface StaffMember {
   nameObj: Name;
   name: string;
   email: string;
   ID: string;
-  cellPhone?:string;
+  cellPhone?: string;
   currentStaff: boolean;
   roles: Role[];
 }
@@ -403,11 +384,36 @@ export interface RelationDepartureList {
   [ID: string]: DepartedRelation;
 }
 export interface PeriodMetaItem {
-  period: string;
+  name: string;
   school: SchoolBoolean;
   terms: TermList;
   advisor: boolean;
   academicYear: string;
+  nonAttendance?: boolean;
+}
+
+
+export interface PeriodMetaGroup {
+  name: string;
+  pairs: any;
+}
+
+export type MetaReportType = 'advisor' | 'sport' | 'conflict' | 'min classes';
+
+export interface MetaReportItem {
+  ID: string;
+  name: string;
+  periods: string[];
+}
+
+export interface SectionMetaReport {
+  type: MetaReportType;
+  items: MetaReportItem[];
+}
+
+export interface SectionReportColumn {
+  name: string;
+  type: MetaReportType[];
 }
 
 export interface PeriodObj {
@@ -436,24 +442,27 @@ export interface FeedbackForm {
   ID: string;
 }
 type SectionChangeType =
-  | "student-withdrawl"
-  | "student-enrollment"
-  | "student-removal"
-  | "teacher-added"
-  | "teacher-removed"
-  | "name-changed"
-  | "school-changed"
-  | "period-changed"
-  | "terms-changed"
-  | "section-created"
-  | "section-deleted"
-  | "room-changed";
+| "student-withdrawl"
+| "student-enrollment"
+| "student-removal"
+| "teacher-added"
+| "teacher-removed"
+| "name-changed"
+| "school-changed"
+| "period-changed"
+| "terms-changed"
+| "section-created"
+| "section-deleted"
+| "room-changed"
+| "feedbackOnly-changed"
+;
 
 export interface SectionIndividualChange {
   sectionID: string;
   type: SectionChangeType;
   individual?: SimpleIndividual;
   date: string;
+  isLateChange?: boolean;
 }
 
 export interface SectionPropChange {
@@ -463,6 +472,11 @@ export interface SectionPropChange {
   property: string;
   previousValue: any;
   newValue: any;
+}
+
+export interface CoursePropChange {
+  courseID: string;
+  name: string;
 }
 
 export interface SectionUpdate {
@@ -521,6 +535,31 @@ export interface ClassReport {
   school: School;
 }
 
+export interface TermYearPair {
+  term: Term;
+  year: string;
+}
+
+export interface ScheduleTemplate {
+  name: string;
+  ID: string;
+  periods: PeriodList;
+  school: School;
+}
+
+export interface SchoolSched {
+  periods: PeriodObj[];
+  isClosed: boolean;
+  term: string;
+  academicYear: string;
+  uid?: string;
+}
+
+export interface SchoolSchedGroup {
+  "OFS-MS"?: SchoolSched;
+  "OFS-US"?: SchoolSched;
+}
+
 export interface ClassNote {
   courseID: string;
   markingColumn: MarkingColumn;
@@ -553,7 +592,7 @@ export interface ArchivedLabeledSet extends LabelSet {
 
 export interface RepeatedTask {
   ID: string;
-  repeatFrequency: 'daily' | 'weekdays' | 'weekly' | 'monthly';
+  repeatFrequency: "daily" | "weekdays" | "weekly" | "monthly";
   functionName: string;
   active: boolean;
   startDate: string;
@@ -563,7 +602,7 @@ export interface RepeatedTask {
 
 export interface OneTimeTask {
   ID: string;
-  status: 'scheduled' | 'complete' | 'error';
+  status: "scheduled" | "complete" | "error";
   functionName: string;
   triggerTime: string;
   isRepeat: boolean;
@@ -572,29 +611,28 @@ export interface OneTimeTask {
 }
 
 export interface OnCreateTask {
-  type: 'Section' | 'Student' | 'Course' | 'StaffMember';
+  type: "Section" | "Student" | "Course" | "StaffMember";
 }
 
 export interface onCreateSectionTask extends OnCreateTask {
-  type: 'Section',
+  type: "Section";
   teachersIncludedOnFeedbacks: string[]; // Course ID array
-  
 }
 
 export interface PromiseDict {
-  [key: string]: (options?: any) =>  Promise<void>;
+  [key: string]: (options?: any) => Promise<void>;
 }
 
 export interface MailgunOptions {
-  to: string,
-  from: string,
-  cc?: string,
-  bcc?: string,
-  subject: string,
-  text: string,
-  html?: string,
+  to: string;
+  from: string;
+  cc?: string;
+  bcc?: string;
+  subject: string;
+  text: string;
+  html?: string;
 }
-  
+
 export interface BankTransaction {
   ID: string;
   accountBalance: number;
@@ -617,7 +655,6 @@ export interface BankAccount {
   authorizedUsers?: SimpleList;
   withdrawls: number;
 }
-
 
 export interface Boarder {
   ID: string;
@@ -772,7 +809,7 @@ export interface CheckInTiming {
   name: string;
   start: string;
   end: string;
-  type: 'aod' | 'regular';
+  type: "aod" | "regular";
 }
 
 export interface CheckInTimingMap {
