@@ -2,7 +2,6 @@
 
 import { firestore } from "firebase-admin";
 import { ROLES } from "./constants";
-
 export type Role = typeof ROLES[number];
 
 export type DepartureType =
@@ -393,13 +392,12 @@ export interface PeriodMetaItem {
   nonAttendance?: boolean;
 }
 
-
 export interface PeriodMetaGroup {
   name: string;
   pairs: any;
 }
 
-export type MetaReportType = 'advisor' | 'sport' | 'conflict' | 'min classes';
+export type MetaReportType = "advisor" | "sport" | "conflict" | "min classes";
 
 export interface MetaReportItem {
   ID: string;
@@ -439,20 +437,19 @@ export interface FeedbackForm {
   ID: string;
 }
 type SectionChangeType =
-| "student-withdrawl"
-| "student-enrollment"
-| "student-removal"
-| "teacher-added"
-| "teacher-removed"
-| "name-changed"
-| "school-changed"
-| "period-changed"
-| "terms-changed"
-| "section-created"
-| "section-deleted"
-| "room-changed"
-| "feedbackOnly-changed"
-;
+  | "student-withdrawl"
+  | "student-enrollment"
+  | "student-removal"
+  | "teacher-added"
+  | "teacher-removed"
+  | "name-changed"
+  | "school-changed"
+  | "period-changed"
+  | "terms-changed"
+  | "section-created"
+  | "section-deleted"
+  | "room-changed"
+  | "feedbackOnly-changed";
 
 export interface SectionIndividualChange {
   sectionID: string;
@@ -890,7 +887,7 @@ export interface EmailListQuery {
   includeConsultants: boolean;
 }
 
-export interface QueryLists {	
-  students?: Student[];	
-  relations: Relation[];	
+export interface QueryLists {
+  students?: Student[];
+  relations: Relation[];
 }

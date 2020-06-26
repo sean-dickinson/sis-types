@@ -9,11 +9,8 @@
         "noImplicitThis": false,
         "strictNullChecks": true,
         "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
-        "types": [],
-        "noEmit": true,
+        "outDir": "./dist",
+        "sourceMap": false,
         "forceConsistentCasingInFileNames": true
     },
     "files": [
