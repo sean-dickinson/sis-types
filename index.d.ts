@@ -3,7 +3,7 @@
 import { firestore } from "firebase-admin";
 import { ROLES } from "./constants";
 
-export type Role = typeof ROLES;
+export type Role = typeof ROLES[number];
 
 export type DepartureType =
   | "dismissed"
