@@ -341,6 +341,7 @@ export interface TimeRange {
 
 export interface Relation {
   hasCurrentStudent: boolean;
+  hasCurrentBoarder: boolean;
   email: string;
   address: Address;
   nameObj: Name;
@@ -349,7 +350,6 @@ export interface Relation {
   relations: RelationList | RelationDepartureList;
   relationClasses: BooleanList;
   nonStudentRelations: RelationList;
-  hasBoarder: boolean;
   cellPhone?: string;
   homePhone?: string;
   workPhone?: string;
