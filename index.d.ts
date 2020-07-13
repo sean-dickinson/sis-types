@@ -155,7 +155,7 @@ export interface Student {
   cellPhone?: string;
   feedbackEmails: string[];
   permissions: Permissions;
-  enrolledYears: string[];
+  enrollmentYears: string[];
   enrollments: Enrollment[];
 }
 
