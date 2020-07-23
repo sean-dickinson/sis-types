@@ -885,6 +885,9 @@ export interface EmailListQuery {
   includeInternationalParents: boolean;
   includeStudents: boolean;
   includeConsultants: boolean;
+  name: string;
+  excludedRecords?: string[];
+  extraRecords?: string[];
 }
 
 export interface QueryLists {
