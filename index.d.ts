@@ -885,9 +885,16 @@ export interface EmailListQuery {
   includeInternationalParents: boolean;
   includeStudents: boolean;
   includeConsultants: boolean;
-  name: string;
   excludedRecords?: string[];
   extraRecords?: string[];
+}
+
+export interface EmailQueryRecord {
+  query: EmailListQuery;
+  name: string;
+  type: 'user' | 'premade';
+  ID: string;
+  user: string; // this is the ID of the user who made it
 }
 
 export interface QueryLists {
