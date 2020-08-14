@@ -907,7 +907,9 @@ export type ScreenFailReason = 'Temp' | 'Symptoms/Positive' | 'Contact' | 'Trave
 export interface CovidScreen {
   ID: string;
   name: string;
-  clearedScreen: boolean;
+  date: string;
+  clearedScreen?: boolean;
   failedScreen?: string;
   clearedTemp?: boolean;
+  excused?: boolean;
 }
