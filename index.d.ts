@@ -913,3 +913,7 @@ export interface CovidScreen {
   clearedTemp?: boolean;
   excused?: boolean;
 }
+
+export interface Constant {
+  value: any;
+}
