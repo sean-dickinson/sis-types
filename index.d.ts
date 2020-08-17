@@ -52,7 +52,7 @@ export type AttendanceCode =
   | "Counselor"
   | "ABS";
 
-export type BoardType = "5 Day" | "7 Day" | "Day";
+export type BoardType = "5 Day" | "7 Day" | "Day" | "Remote";
 
 export interface AttendanceMark {
   code: AttendanceCode;
@@ -949,4 +949,20 @@ export interface EmailQueryRecord {
 export interface QueryLists {
   students?: Student[];
   relations: Relation[];
+}
+
+export type ScreenFailReason = 'Temp' | 'Symptoms/Positive' | 'Contact' | 'Travel';
+
+export interface CovidScreen {
+  ID: string;
+  name: string;
+  date: string;
+  clearedScreen?: boolean;
+  failedScreen?: string;
+  clearedTemp?: boolean;
+  excused?: boolean;
+}
+
+export interface Constant {
+  value: any;
 }
