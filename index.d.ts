@@ -170,7 +170,7 @@ export interface Student {
   birthDate: string;
   boarder: BoardType;
   classOf: number;
-  currentSchool: string;
+  currentSchool: School;
   currentStudent: boolean;
   email: string;
   gender: string;
@@ -419,11 +419,29 @@ export interface PeriodMetaItem {
 }
 
 export interface ReportListItem {
-  ID: string,
-  name: string,
-  isBoarder: boolean,
-  academicMarks: CodeTotals,
-  otherMark: CodeTotals
+  ID: string;
+  name: string;
+  isBoarder: boolean;
+  academicMarks: CodeTotals;
+  otherMarks: MarksBreakdown;
+  academicTotal?: number;
+  otherTotal?: number;
+}
+
+export interface PeriodListParams {
+  start: Date;
+  end: Date;
+  period: string;
+}
+
+export interface PeriodListItem {
+  ID: string;
+  name: string;
+  list: AttendanceRecord[];
+  totalMarks: number;
+  totalLates: number;
+  totalAbsences: number;
+  isBoarder: boolean;
 }
 
 export interface MarksBreakdown {
