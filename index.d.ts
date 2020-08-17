@@ -2,6 +2,7 @@
 
 import { firestore } from "firebase-admin";
 import { ROLES } from "./constants";
+import { Observable } from "rxjs";
 export type Role = typeof ROLES[number];
 
 export type DepartureType =
@@ -422,10 +423,24 @@ export interface ReportListItem {
   ID: string;
   name: string;
   isBoarder: boolean;
-  academicMarks: CodeTotals;
+  academicMarks: MarksBreakdown;
   otherMarks: MarksBreakdown;
   academicTotal?: number;
   otherTotal?: number;
+}
+
+export interface CourseListItem {
+  name: string;
+  period: string;
+  sectionID: string;
+  school: string;
+  done?: Observable<boolean>;
+}
+
+export interface SimpleExcusal {
+  name: string;
+  start: string;
+  comment: string;
 }
 
 export interface PeriodListParams {

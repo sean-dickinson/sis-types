@@ -3,7 +3,8 @@
   "version": "0.14.1",
   "private": "true",
   "dependencies": {
-    "firebase-admin": "^8.10.0"
+    "firebase-admin": "^8.10.0",
+    "rxjs": "^6.6.2"
   },
   "types": "index.d.ts",
   "main": "./dist/constants.js"
