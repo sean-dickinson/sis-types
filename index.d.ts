@@ -82,12 +82,12 @@ export interface StudentAttendanceReport {
 }
 
 export interface DateReportItem {
-  date: string;
+  date: Date;
   academicYear: string;
   term: string;
+  periods: MarkList;
   schedule: Section[];
-  periods: any,
-  isAllDay: boolean;
+  isAllDay?: boolean;
 }
 
 export interface SectionAttendanceRecord {
@@ -337,6 +337,7 @@ export interface TimeExcusal {
   includedDays: string[];
   edited: string;
   editedBy: string;
+  shouldDelete?: boolean;
   uid: string;
 }
 
@@ -425,6 +426,28 @@ export interface ReportListItem {
   otherMark: CodeTotals
 }
 
+export interface MarksBreakdown {
+  lates: number;
+  known: number;
+  absences: number;
+  nurse: number;
+  counselor: number;
+}
+
+export interface ReportFilters {
+  lates: boolean;
+  absences: boolean;
+  nurse: boolean;
+  known: boolean;
+  counselor: boolean;
+}
+
+export interface ExcusalResult {
+  shouldClear: boolean;
+  message: string;
+  preserved?: SimpleIndividual[];
+}
+
 export interface CodeTotals {
   counselor: number,
   nurse: number,
@@ -436,9 +459,13 @@ export interface CodeTotals {
 
 export interface MultiDataItem {
   name: string;
-  series: any[];
+  series: SeriesItem[];
 }
 
+export interface SeriesItem {
+  name: string;
+  value: number;
+}
 
 
 export interface PeriodMetaGroup {
