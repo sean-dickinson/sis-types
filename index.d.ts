@@ -75,6 +75,31 @@ export interface AttendanceRecord {
   periods: MarkList;
 }
 
+export interface StudentAttendanceReport {
+  listByPeriod:MultiDataItem[],
+  listByDate: DateReportItem[],
+  codeTotals: CodeTotals
+}
+
+export interface DateReportItem {
+  date: string;
+  academicYear: string;
+  term: string;
+  schedule: Section[];
+  periods: any,
+  isAllDay: boolean;
+}
+
+export interface SectionAttendanceRecord {
+  date: string;
+  sectionID: string;
+}
+
+export interface TeacherMarked{
+  student: SimpleIndividual,
+  code: AttendanceCode
+}
+
 export interface CoverageRequest {
   approvalType: string;
   coveredBy: string;
@@ -391,6 +416,30 @@ export interface PeriodMetaItem {
   academicYear: string;
   nonAttendance?: boolean;
 }
+
+export interface ReportListItem {
+  ID: string,
+  name: string,
+  isBoarder: boolean,
+  academicMarks: CodeTotals,
+  otherMark: CodeTotals
+}
+
+export interface CodeTotals {
+  counselor: number,
+  nurse: number,
+  known: number,
+  absences: number,
+  lates: number,
+  days: number
+}
+
+export interface MultiDataItem {
+  name: string;
+  series: any[];
+}
+
+
 
 export interface PeriodMetaGroup {
   name: string;
