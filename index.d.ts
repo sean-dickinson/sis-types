@@ -1018,7 +1018,8 @@ export interface CovidScreen {
   name: string;
   date: string;
   clearedScreen?: boolean;
-  failedScreen?: string;
+  failedScreenReasons?: ScreenFailReason[];
+  tempTaken?: boolean;
   clearedTemp?: boolean;
   excused?: boolean;
 }
