@@ -1013,6 +1013,8 @@ export interface QueryLists {
 
 export type ScreenFailReason = 'Temp' | 'Symptoms/Positive' | 'Contact' | 'Travel';
 
+export type Screener = 'Parent' | 'School';
+
 export interface CovidScreen {
   ID: string;
   name: string;
@@ -1022,6 +1024,9 @@ export interface CovidScreen {
   tempTaken?: boolean;
   clearedTemp?: boolean;
   excused?: boolean;
+  canEdit: boolean;
+  screenedBy?: Screener;
+  uid: string;
 }
 
 export interface Constant {
