@@ -1024,6 +1024,7 @@ export interface CovidScreen {
   failedScreenReasons?: ScreenFailReason[];
   tempTaken?: boolean;
   clearedTemp?: boolean;
+  location: "Hill" | "Craig" | "Quad" | "Theater";
   excused?: boolean;
   canEdit: boolean;
   screenedBy?: Screener;
