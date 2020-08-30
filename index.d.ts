@@ -1015,6 +1015,8 @@ export type ScreenFailReason = 'Temp' | 'Symptoms/Positive' | 'Contact' | 'Trave
 
 export type Screener = 'Parent' | 'School';
 
+export type ScreenLocation = "Hill" | "Craig" | "Quad" | "Theater";
+
 export interface CovidScreen {
   ID: string;
   name: string;
@@ -1024,7 +1026,7 @@ export interface CovidScreen {
   failedScreenReasons?: ScreenFailReason[];
   tempTaken?: boolean;
   clearedTemp?: boolean;
-  location: "Hill" | "Craig" | "Quad" | "Theater";
+  location: ScreenLocation
   excused?: boolean;
   canEdit: boolean;
   screenedBy?: Screener;
