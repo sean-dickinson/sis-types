@@ -51,7 +51,8 @@ export type AttendanceCode =
   | "LT-U"
   | "Nurse"
   | "Counselor"
-  | "ABS";
+  | "ABS"
+  | "Screen";
 
 export type BoardType = "5 Day" | "7 Day" | "Day" | "Remote";
 
