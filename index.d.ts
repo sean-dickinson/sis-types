@@ -1034,6 +1034,12 @@ export interface CovidScreen {
   uid: string;
 }
 
+export interface ScreenedOutRecord {
+  name: string;
+  ID: string;
+  timeExcusal: string;
+}
+
 export interface Constant {
   value: any;
 }
