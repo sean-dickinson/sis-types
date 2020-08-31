@@ -1038,6 +1038,7 @@ export interface ScreenedOutRecord {
   name: string;
   ID: string;
   timeExcusal: string;
+  uid: string;
 }
 
 export interface Constant {
