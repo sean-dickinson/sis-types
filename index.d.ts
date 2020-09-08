@@ -54,7 +54,7 @@ export type AttendanceCode =
   | "ABS"
   | "Screen";
 
-export type BoardType = "5 Day" | "7 Day" | "Day" | "Remote";
+export type BoardType = "5 Day" | "7 Day" | "Day" | "Remote" | "Intl. Remote";
 
 export interface AttendanceMark {
   code: AttendanceCode;
