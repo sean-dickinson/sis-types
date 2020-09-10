@@ -1026,6 +1026,7 @@ export interface CovidScreen {
   clearedScreen?: boolean;
   failedScreenReasons?: ScreenFailReason[];
   tempTaken?: boolean;
+  tempTaker?:string,
   clearedTemp?: boolean;
   location: ScreenLocation
   excused?: boolean;
