@@ -34,6 +34,10 @@ export const ROLES = [
   "middleScheduleEdit",
   // reporting roles
   "attendanceReporting",
+  // attendance roles
+  "attendanceInput",
   // email roles
   "emailAdmin",
+  //other roles
+  "busDuty"
 ] as const;

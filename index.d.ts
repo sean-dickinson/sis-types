@@ -2,6 +2,7 @@
 
 import { firestore } from "firebase-admin";
 import { ROLES } from "./constants";
+import { Observable } from "rxjs";
 export type Role = typeof ROLES[number];
 
 export type DepartureType =
@@ -50,9 +51,10 @@ export type AttendanceCode =
   | "LT-U"
   | "Nurse"
   | "Counselor"
-  | "ABS";
+  | "ABS"
+  | "Screen";
 
-export type BoardType = "5 Day" | "7 Day" | "Day" | "Remote";
+export type BoardType = "5 Day" | "7 Day" | "Day" | "Remote" | "Intl. Remote";
 
 export interface AttendanceMark {
   code: AttendanceCode;
@@ -73,6 +75,31 @@ export interface AttendanceRecord {
   isBoarder?: boolean;
   isAllDay?: boolean;
   periods: MarkList;
+}
+
+export interface StudentAttendanceReport {
+  listByPeriod:MultiDataItem[],
+  listByDate: DateReportItem[],
+  codeTotals: CodeTotals
+}
+
+export interface DateReportItem {
+  date: Date;
+  academicYear: string;
+  term: string;
+  periods: MarkList;
+  schedule: Section[];
+  isAllDay?: boolean;
+}
+
+export interface SectionAttendanceRecord {
+  date: string;
+  sectionID: string;
+}
+
+export interface TeacherMarked{
+  student: SimpleIndividual,
+  code: AttendanceCode
 }
 
 export interface CoverageRequest {
@@ -145,7 +172,7 @@ export interface Student {
   birthDate: string;
   boarder: BoardType;
   classOf: number;
-  currentSchool: string;
+  currentSchool: School;
   currentStudent: boolean;
   email: string;
   gender: string;
@@ -312,6 +339,7 @@ export interface TimeExcusal {
   includedDays: string[];
   edited: string;
   editedBy: string;
+  shouldDelete?: boolean;
   uid: string;
 }
 
@@ -391,6 +419,88 @@ export interface PeriodMetaItem {
   academicYear: string;
   nonAttendance?: boolean;
 }
+
+export interface ReportListItem {
+  ID: string;
+  name: string;
+  isBoarder: boolean;
+  academicMarks: MarksBreakdown;
+  otherMarks: MarksBreakdown;
+  academicTotal?: number;
+  otherTotal?: number;
+}
+
+export interface CourseListItem {
+  name: string;
+  period: string;
+  sectionID: string;
+  school: string;
+  done?: Observable<boolean>;
+}
+
+export interface SimpleExcusal {
+  name: string;
+  start: string;
+  comment: string;
+}
+
+export interface PeriodListParams {
+  start: Date;
+  end: Date;
+  period: string;
+}
+
+export interface PeriodListItem {
+  ID: string;
+  name: string;
+  list: AttendanceRecord[];
+  totalMarks: number;
+  totalLates: number;
+  totalAbsences: number;
+  isBoarder: boolean;
+}
+
+export interface MarksBreakdown {
+  lates: number;
+  known: number;
+  absences: number;
+  nurse: number;
+  counselor: number;
+}
+
+export interface ReportFilters {
+  lates: boolean;
+  absences: boolean;
+  nurse: boolean;
+  known: boolean;
+  counselor: boolean;
+}
+
+export interface ExcusalResult {
+  shouldClear: boolean;
+  message: string;
+  preserved?: SimpleIndividual[];
+}
+
+export interface CodeTotals {
+  counselor: number,
+  nurse: number,
+  known: number,
+  absences: number,
+  lates: number,
+  days: number
+}
+
+export interface MultiDataItem {
+  name: string;
+  series: SeriesItem[];
+}
+
+export interface SeriesItem {
+  name: string;
+  value: number;
+}
+
 
 export interface PeriodMetaGroup {
   name: string;
@@ -904,14 +1014,31 @@ export interface QueryLists {
 
 export type ScreenFailReason = 'Temp' | 'Symptoms/Positive' | 'Contact' | 'Travel';
 
+export type Screener = 'Parent' | 'School';
+
+export type ScreenLocation = "Hill" | "Craig" | "Quad" | "Theater";
+
 export interface CovidScreen {
   ID: string;
   name: string;
   date: string;
+  screenDone: boolean;
   clearedScreen?: boolean;
-  failedScreen?: string;
+  failedScreenReasons?: ScreenFailReason[];
+  tempTaken?: boolean;
   clearedTemp?: boolean;
+  location: ScreenLocation
   excused?: boolean;
+  canEdit: boolean;
+  screenedBy?: Screener;
+  uid: string;
+}
+
+export interface ScreenedOutRecord {
+  name: string;
+  ID: string;
+  timeExcusal: string;
+  uid: string;
 }
 
 export interface Constant {

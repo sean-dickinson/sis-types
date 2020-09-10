@@ -9,7 +9,7 @@
         "noImplicitThis": false,
         "strictNullChecks": true,
         "baseUrl": "../",
-        "outDir": "./",
+        "outDir": "./dist",
         "sourceMap": false,
         "forceConsistentCasingInFileNames": true
     },
