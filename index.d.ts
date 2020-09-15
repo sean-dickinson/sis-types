@@ -274,6 +274,7 @@ export interface SimpleIndividual {
 export interface SectionIndividual extends SimpleIndividual {
   enrolled?: string;
   withdrawn?: string;
+  remote?: boolean;
 }
 
 export interface SimpleList {
