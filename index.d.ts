@@ -402,6 +402,7 @@ export interface SimpleRelation extends SimpleIndividual {
   livesWith: boolean;
   receivesReportCards: boolean;
   receivesFeedbackForms: boolean;
+  receivesScreeningForms: boolean
 }
 
 export interface DepartedRelation extends SimpleRelation {
