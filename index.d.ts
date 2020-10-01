@@ -1042,6 +1042,7 @@ export interface ScreenedOutRecord {
   ID: string;
   timeExcusal: string;
   uid: string;
+  previousStatus: BoardType;
 }
 
 export interface Constant {
