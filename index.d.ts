@@ -533,6 +533,10 @@ export interface PeriodObj {
   end: string;
 }
 
+export interface PeriodObjWithSchool extends PeriodObj {
+  school: School;
+}
+
 export interface FeedbackForm {
   courseName: string;
   period: string;
