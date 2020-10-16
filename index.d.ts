@@ -347,7 +347,7 @@ export interface TimeExcusal {
 export interface TimeExcusalRequirements {
   student: Student;
   sections: Section[];
-  schedules: PeriodObj[][];
+  schedules: PeriodObjWithSchool[][];
 }
 
 export interface PeriodList {
