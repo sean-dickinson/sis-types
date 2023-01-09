@@ -3,7 +3,7 @@
   "version": "0.21.1",
   "private": "true",
   "dependencies": {
-    "firebase-admin": "^8.10.0",
+    "firebase-admin": "^11.4.1",
     "rxjs": "^6.4.0"
   },
   "types": "index.d.ts",
